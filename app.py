@@ -79,6 +79,7 @@ if st.session_state.pagina == 'selecao':
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
     with c2:
+        # Removido qualquer espaçamento extra antes do título
         st.markdown('<div class="card"><h3>Granulometria</h3><p>Medição do tamanho e distribuição das bolhas para avaliar a homogeneidade da amostra.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
