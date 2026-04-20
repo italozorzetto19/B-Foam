@@ -17,7 +17,7 @@ col1, col2 = st.columns([1, 3])
 with col1:
     try:
         # CERTIFIQUE-SE DE QUE O NOME DO ARQUIVO É EXACTAMENTE ESTE:
-        st.image("logo_msb.png", use_column_width=True) 
+        st.image("logo-msb.png", use_column_width=True) 
     except:
         st.error("Logo não encontrada")
 with col2:
