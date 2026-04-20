@@ -131,23 +131,16 @@ if st.session_state.pagina == 'selecao':
    # URL formatada para exportação direta do Google Drive (o mesmo ID que você me deu)
     link_video_granulometria = "https://drive.google.com/file/d/13aP2W2rSOOqiqhY2HrlEcUQrhLNE6FKU/view?usp=sharing"
 
-    with c2:
-        # Início do Card Customizado com a borda azul
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        
-        # 1. O VÍDEO NO TOPO (Substituindo o logo e o retângulo vazio)
-        # O Streamlit ajustará a altura automaticamente dentro do card
-        st.video(link_video_granulometria)
-        
-        # 2. O TÍTULO EM AZUL MAIS CLARO (Onde estava o texto antigo, agora embaixo)
-        # Usamos uma classe CSS para dar a cor azul claro
-        st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
-        
-        # Fechamento do Card
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # O botão de selecionar continua abaixo do card para não misturar as ações
-        if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
+   with c2:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    
+    # Agora o player do YouTube funcionará perfeitamente sem bloqueios
+    st.video("https://youtu.be/hY5K55Ha2pg")
+    
+    st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
     with c3:
         # Card de Estabilidade com imagem
