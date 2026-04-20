@@ -1,74 +1,60 @@
 import streamlit as st
 import base64 
-from PIL import Image
 
 # Configuração da Página
 st.set_page_config(page_title="B-Foam MSB", page_icon="🔬", layout="centered")
 
 # --- FUNÇÃO PARA CONVERTER IMAGEM PARA BASE64 ---
 def get_image_as_base64(path):
-    with open(path, "rb") as image_file:
-        data = base64.b64encode(image_file.read()).decode()
-    return f"data:image/png;base64,{data}"
+    try:
+        with open(path, "rb") as image_file:
+            data = base64.b64encode(image_file.read()).decode()
+        return f"data:image/png;base64,{data}"
+    except:
+        return ""
 
 # --- ESTILIZAÇÃO CSS CUSTOMIZADA ---
 st.markdown("""
 <style>
-    /* Cabeçalho centralizado e com ajuste de texto */
+    /* Cabeçalho */
     #header-container {
         background-color: white; color: black; padding: 20px; border-radius: 10px; margin-bottom: 30px;
-        display: flex; align-items: center; justify-content: center; /* Centraliza conteúdo */
-        width: 100%; text-align: center;
+        display: flex; align-items: center; justify-content: center; width: 100%; text-align: left;
     }
-    
-    /* Centralizar botão */
-    .stButton { display: flex; justify-content: center; }
-    .stButton>button { width: 80%; border-radius: 10px; }
+    #header-container img { height: 70px; margin-right: 20px; }
+    #header-container h1 { margin: 0; font-size: 1.8em; font-weight: bold; }
+    #header-container p { margin: 0; font-size: 0.9em; opacity: 0.8; }
 
-    /* Ajuste para evitar quebra de linha estranha */
+    /* Título Amarelo */
+    .titulo-amarelo { color: #FFD700; font-size: 2.2em; font-weight: bold; text-align: center; margin: 30px 0; }
+
+    /* Cards */
     .card { 
-        background-color: #1E3A5F; padding: 20px; border-radius: 15px; 
-        border: 1px solid #2E7BCF; text-align: center; min-height: 250px;
+        background-color: #1E3A5F; padding: 15px; border-radius: 15px; 
+        border: 1px solid #2E7BCF; text-align: center; height: 220px;
         display: flex; flex-direction: column; justify-content: flex-start;
     }
+    .card h3 { color: #FFFFFF; margin-top: 0; margin-bottom: 10px; }
+    .card p { color: #B9D1EA; font-size: 0.85em; margin: 0; line-height: 1.4; }
 
-    .titulo-amarelo { 
-        color: #FFD700; 
-        font-size: 2.5em;      /* Aumentei para 2.5em (pode ajustar para mais ou menos) */
-        font-weight: bold; 
-        text-align: center;    /* Centraliza o texto */
-        margin-top: 20px;      /* Espaço superior */
-        margin-bottom: 20px;   /* Espaço inferior para separar dos cards */
-    }
-
-    .card { 
-        background-color: #1E3A5F; padding: 20px; border-radius: 15px; 
-        border: 1px solid #2E7BCF; text-align: center; min-height: 180px;
-    }
-    .card h3 { color: #FFFFFF; margin-bottom: 5px; }
-    .card p { color: #B9D1EA; font-size: 0.9em; margin: 0; }
-    
-    .stButton>button { width: 100%; border-radius: 10px; }
+    /* Botão Centralizado */
+    div.stButton { text-align: center; margin-top: 10px; }
+    div.stButton > button { width: 100%; border-radius: 10px; border: 1px solid #2E7BCF; }
 </style>
 """, unsafe_allow_html=True)
 
-# --- SISTEMA DE NAVEGAÇÃO E STATE ---
-if 'pagina' not in st.session_state:
-    st.session_state.pagina = 'selecao'
+# --- SISTEMA DE NAVEGAÇÃO ---
+if 'pagina' not in st.session_state: st.session_state.pagina = 'selecao'
 
 def ir_para_cadastro(tipo):
     st.session_state.pagina = 'cadastro'
     st.session_state.tipo_selecionado = tipo
 
-# --- TELA 1: SELEÇÃO DE ANÁLISE ---
+# --- TELA 1: SELEÇÃO ---
 if st.session_state.pagina == 'selecao':
-    
-    # Cabeçalho
-    try:
-        logo_base64 = get_image_as_base64("logo-msb.png") 
-        st.markdown(f'''<div id="header-container"><img src="{logo_base64}" alt="MSB Logo">
-                      <div><h1>B-Foam</h1><p>Engenharia - MSB - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
-    except: st.error("Logotipo não encontrado.")
+    logo = get_image_as_base64("logo-msb.png") 
+    st.markdown(f'''<div id="header-container"><img src="{logo}">
+                  <div><h1>B-Foam</h1><p>Engenharia MSB - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
 
     st.markdown('<p class="titulo-amarelo">Selecione o tipo de análise desejada:</p>', unsafe_allow_html=True)
     
@@ -79,7 +65,6 @@ if st.session_state.pagina == 'selecao':
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
     with c2:
-        # Removido qualquer espaçamento extra antes do título
         st.markdown('<div class="card"><h3>Granulometria</h3><p>Medição do tamanho e distribuição das bolhas para avaliar a homogeneidade da amostra.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
@@ -87,23 +72,14 @@ if st.session_state.pagina == 'selecao':
         st.markdown('<div class="card"><h3>Estabilidade</h3><p>Avaliação da resistência estrutural da espuma sob variações de pressão e tempo.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="ed"): ir_para_cadastro("Estabilidade Dinâmica")
 
-    # Sidebar apenas na tela de seleção
     with st.sidebar:
         st.header("Vídeos de Apoio")
         st.video("https://youtu.be/hY5K55Ha2pg")
         st.write("Assista ao teste de medição do tamanho de bolhas.")
 
-# --- TELA 2: CADASTRO DE TESTE ---
+# --- TELA 2: CADASTRO ---
 elif st.session_state.pagina == 'cadastro':
-    try:
-        logo_base64 = get_image_as_base64("logo-msb.png") 
-        st.markdown(f'''<div id="header-container"><img src="{logo_base64}" alt="MSB Logo">
-                      <div><h1>Analisador B-Foam</h1><p>Medical System do Brasil - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
-    except: pass
-    
-    st.markdown("---")
     st.subheader(f"Ficha de Cadastro: {st.session_state.tipo_selecionado}")
-    
     if st.button("⬅️ Voltar ao Menu Principal"):
         st.session_state.pagina = 'selecao'
         st.rerun()
