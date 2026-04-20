@@ -131,6 +131,12 @@ if st.session_state.pagina == 'selecao':
         st.markdown('<h3>Estabilidade</h3><p>(Estabilidade Dinâmica)</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="ed"): ir_para_cadastro("Estabilidade Dinâmica")
 
+with st.sidebar:
+    st.header("Vídeo de Apoio")
+    st.video("https://youtu.be/hY5K55Ha2pg")
+    st.write("Assista ao tutorial antes de iniciar a análise.")
+
+
 # --- TELA 2: CADASTRO DE TESTE (MODULARIZADA) ---
 elif st.session_state.pagina == 'cadastro':
     
