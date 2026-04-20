@@ -89,4 +89,48 @@ elif st.session_state.pagina == 'cadastro':
         st.rerun()
     tab1, tab2 = st.tabs(["➕ Cadastrar Novo Teste", "🔍 Buscar Histórico"])
     with tab1:
-        st.write("Aguardando upload da imagem para análise...")
+        st.markdown("### 📸 Upload e Identificação do Teste")
+        
+        # Criação de duas colunas para organização
+        col_img, col_form = st.columns([1, 1.5])
+        
+        with col_img:
+            uploaded_file = st.file_uploader("Escolha a imagem do teste:", type=['png', 'jpg', 'jpeg'])
+            if uploaded_file:
+                st.image(uploaded_file, caption="Imagem carregada", use_column_width=True)
+
+        with col_form:
+            with st.form("form_novo_teste", clear_on_submit=True):
+                # Campos de texto
+                amostra = st.text_input("Amostra (ex: 1)", placeholder="001")
+                teste = st.text_input("Teste (ex: 1)", placeholder="001")
+                tempo = st.number_input("Tempo de estabilidade (segundos)", min_value=0, step=1)
+                
+                # Campos de seleção
+                concentracao = st.selectbox("Concentração do Polidocanol", 
+                                            ["3,00%", "1,00%", "0,50%", "0,25%"])
+                
+                dispositivo = st.selectbox("Dispositivo utilizado", 
+                                          ["V08", "V09", "V10", "Tessari", "Outros"])
+                
+                # Lógica para o campo "Outros"
+                outro_dispositivo = ""
+                if dispositivo == "Outros":
+                    outro_dispositivo = st.text_input("Especifique o outro dispositivo:")
+
+                # Botão de Salvar
+                btn_salvar = st.form_submit_button("Salvar Registro")
+
+                if btn_salvar:
+                    # Lógica de padronização (transforma "1" em "001")
+                    amostra_fmt = amostra.zfill(3)
+                    teste_fmt = teste.zfill(3)
+                    disp_final = outro_dispositivo if dispositivo == "Outros" else dispositivo
+                    
+                    if uploaded_file:
+                        # Nome do arquivo conforme seus critérios
+                        nome_arquivo = f"A{amostra_fmt}_T{teste_fmt}_{tempo}s_{concentracao}_{disp_final}.png"
+                        st.success(f"Dados validados! Pronto para salvar como: {nome_arquivo}")
+                        # DICA: Aqui você chamaria sua função de salvar o arquivo em disco/banco
+                    else:
+                        st.error("Por favor, faça o upload da imagem antes de salvar.")
