@@ -14,13 +14,23 @@ def get_image_as_base64(path):
 # --- ESTILIZAÇÃO CSS CUSTOMIZADA ---
 st.markdown("""
 <style>
+    /* Cabeçalho centralizado e com ajuste de texto */
     #header-container {
         background-color: white; color: black; padding: 20px; border-radius: 10px; margin-bottom: 30px;
-        display: flex; align-items: center; width: 100%;
+        display: flex; align-items: center; justify-content: center; /* Centraliza conteúdo */
+        width: 100%; text-align: center;
     }
-    #header-container img { height: 80px; margin-right: 25px; }
-    #header-container h1 { margin: 0; font-size: 2.2em; font-weight: bold; }
-    #header-container p { margin: 0; font-size: 1.1em; opacity: 0.8; }
+    
+    /* Centralizar botão */
+    .stButton { display: flex; justify-content: center; }
+    .stButton>button { width: 80%; border-radius: 10px; }
+
+    /* Ajuste para evitar quebra de linha estranha */
+    .card { 
+        background-color: #1E3A5F; padding: 20px; border-radius: 15px; 
+        border: 1px solid #2E7BCF; text-align: center; min-height: 250px;
+        display: flex; flex-direction: column; justify-content: flex-start;
+    }
 
     .titulo-amarelo { 
         color: #FFD700; 
