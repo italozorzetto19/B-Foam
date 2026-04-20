@@ -31,9 +31,18 @@ st.markdown("""
     .card h3 { color: #FFFFFF; font-size: 1.3em; margin: 0 0 10px 0; } /* Fonte levemente reduzida */
     .card p { color: #B9D1EA; font-size: 0.8em; margin: 0; line-height: 1.3; }
 
-    /* Botão Centralizado */
-    div.stButton { text-align: center; margin-top: 8px; }
-    div.stButton > button { width: 90%; border-radius: 10px; }
+       /* Botão Centralizado e com tamanho adaptável */
+    div.stButton { 
+        text-align: center; 
+        margin-top: 10px; 
+    }
+    div.stButton > button { 
+        width: 80%;            /* Reduzi um pouco de 100% para 80% para ficar mais elegante */
+        padding: 10px 20px;    /* Adiciona respiro interno ao botão */
+        border-radius: 10px; 
+        border: 1px solid #2E7BCF;
+        white-space: nowrap;   /* Impede que o texto "Selecionar" quebre em duas linhas */
+    }
 </style>
 """, unsafe_allow_html=True)
 
