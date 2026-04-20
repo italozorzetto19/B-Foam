@@ -32,7 +32,7 @@ st.markdown("""
     .card p { color: #B9D1EA; font-size: 0.8em; margin: 0; line-height: 1.3; }
 
     /* Botão Centralizado */
-    div.stButton { text-align: center; margin-top: 10px; }
+    div.stButton { text-align: center; margin-top: 8px; }
     div.stButton > button { width: 90%; border-radius: 10px; }
 </style>
 """, unsafe_allow_html=True)
