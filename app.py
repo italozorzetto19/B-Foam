@@ -20,7 +20,7 @@ st.markdown("""
     }
     #header-container img { height: 60px; margin-right: 15px; }
     
-    .titulo-amarelo { color: #FFD700; font-size: 2.0em; font-weight: bold; text-align: center; margin: 20px 0; }
+    .titulo-amarelo { color: #FFD700; font-size: 4.0em; font-weight: bold; text-align: center; margin: 20px 0; }
 
     /* Cards Centralizados */
     .card { 
@@ -33,15 +33,21 @@ st.markdown("""
 
        /* Botão Centralizado e com tamanho adaptável */
     div.stButton { 
-        text-align: center; 
-        margin-top: 10px; 
+        display: flex; 
+        justify-content: center;
+        margin-top: 10px;
+        width: 100%; /* Garante que o contêiner ocupe a coluna */
     }
+
     div.stButton > button { 
-        width: 80%;            /* Reduzi um pouco de 100% para 80% para ficar mais elegante */
-        padding: 10px 20px;    /* Adiciona respiro interno ao botão */
-        border-radius: 10px; 
+        /* Usamos min-width para garantir que ele não fique minúsculo, 
+           mas permitimos que cresça se necessário */
+        min-width: 120px; 
+        padding: 5px 15px;    
+        border-radius: 8px; 
         border: 1px solid #2E7BCF;
-        white-space: nowrap;   /* Impede que o texto "Selecionar" quebre em duas linhas */
+        white-space: nowrap;   /* Impede que o texto quebre em duas linhas */
+        font-size: 0.9em;      /* Fonte um pouco menor para caber melhor */
     }
 </style>
 """, unsafe_allow_html=True)
