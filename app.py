@@ -1,77 +1,37 @@
 import streamlit as st
-import base64 # Importação necessária para ler a imagem e colocar no HTML
+import base64 
 from PIL import Image
 
 # Configuração da Página
 st.set_page_config(page_title="B-Foam MSB", page_icon="🔬", layout="centered")
 
 # --- FUNÇÃO PARA CONVERTER IMAGEM PARA BASE64 ---
-# Necessária para renderizar a imagem dentro do cabeçalho HTML customizado
 def get_image_as_base64(path):
     with open(path, "rb") as image_file:
         data = base64.b64encode(image_file.read()).decode()
     return f"data:image/png;base64,{data}"
 
-# --- ESTILIZAÇÃO CSS CUSTOMIZADA (Cabeçalho Branco e Cards) ---
+# --- ESTILIZAÇÃO CSS CUSTOMIZADA ---
 st.markdown("""
 <style>
-    /* 1. ESTILO DO CABEÇALHO BRANCO UNIFICADO */
     #header-container {
-        background-color: white;
-        color: black; /* Texto preto para contrastar com o fundo branco */
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        width: 100%;
+        background-color: white; color: black; padding: 20px; border-radius: 10px; margin-bottom: 30px;
+        display: flex; align-items: center; width: 100%;
     }
-    #header-container img {
-        height: 80px; /* Altura do logotipo */
-        margin-right: 25px;
-    }
-    #header-container h1 {
-        margin: 0;
-        font-size: 2.2em;
-        font-weight: bold;
-    }
-    #header-container p {
-        margin: 0;
-        font-size: 1.1em;
-        opacity: 0.8;
-    }
+    #header-container img { height: 80px; margin-right: 25px; }
+    #header-container h1 { margin: 0; font-size: 2.2em; font-weight: bold; }
+    #header-container p { margin: 0; font-size: 1.1em; opacity: 0.8; }
 
-    /* 2. ESTILO DOS CARDS DE SELEÇÃO */
-    .card {
-        background-color: #172A46; /* Fundo azul-marinho dos cards */
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid #2E7BCF; # Borda azul MSB
-        text-align: center;
-        margin-bottom: 15px;
-        transition: 0.3s;
-    }
-    .card:hover { border-width: 2px; } /* Efeito de destaque no hover */
-    .card img {
-        width: 100%; /* Imagem ocupa a largura do card */
-        height: 150px; /* Altura fixa para manter os cards alinhados */
-        object-fit: contain; /* Ajusta a imagem sem distorcer */
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
+    .titulo-amarelo { color: #FFD700; font-size: 1.8em; font-weight: bold; margin-bottom: 20px; }
 
-    /* 3. ESTILO DOS BOTÕES DE SELEÇÃO */
-    .stButton>button {
-        width: 100%;
-        border-radius: 10px;
-        background-color: transparent;
-        border: 2px solid #2E7BCF; # Borda azul MSB
-        color: white;
+    .card { 
+        background-color: #1E3A5F; padding: 20px; border-radius: 15px; 
+        border: 1px solid #2E7BCF; text-align: center; min-height: 180px;
     }
-    .stButton>button:hover {
-        background-color: #2E7BCF; /* Preenche com azul no hover */
-        color: white;
-    }
+    .card h3 { color: #FFFFFF; margin-bottom: 5px; }
+    .card p { color: #B9D1EA; font-size: 0.9em; margin: 0; }
+    
+    .stButton>button { width: 100%; border-radius: 10px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -86,85 +46,50 @@ def ir_para_cadastro(tipo):
 # --- TELA 1: SELEÇÃO DE ANÁLISE ---
 if st.session_state.pagina == 'selecao':
     
-    # --- RENDERIZAÇÃO DO CABEÇALHO BRANCO CUSTOMIZADO ---
+    # Cabeçalho
     try:
-        # Converter a logo para base64 para o HTML
         logo_base64 = get_image_as_base64("logo-msb.png") 
-        
-        # Inserir o HTML customizado
-        header_html = f'''
-        <div id="header-container">
-            <img src="{logo_base64}" alt="MSB Logo">
-            <div>
-                <h1>Analisador B-Foam</h1>
-                <p>Medical System do Brasil - Plataforma de Análise</p>
-            </div>
-        </div>
-        '''
-        st.markdown(header_html, unsafe_allow_html=True)
-        
-    except FileNotFoundError:
-        st.error("Logotipo 'logo-msb.png' não encontrado no repositório.")
-    except Exception as e:
-        st.error(f"Erro ao carregar o cabeçalho: {e}")
+        st.markdown(f'''<div id="header-container"><img src="{logo_base64}" alt="MSB Logo">
+                      <div><h1>Analisador B-Foam</h1><p>Medical System do Brasil - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
+    except: st.error("Logotipo não encontrado.")
 
-    # Separador (pode ser o markdown atual)
-    st.markdown("---")
-
-    st.subheader("Selecione o tipo de análise desejada:")
+    st.markdown('<p class="titulo-amarelo">Selecione o tipo de análise desejada:</p>', unsafe_allow_html=True)
     
-   # Colunas para os cards
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.markdown('<h3>Meia-Vida</h3><p>(Estudo de Decaimento)</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card"><h3>Meia-Vida</h3><p>Análise do tempo de decaimento das microbolhas para determinar a longevidade da espuma.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
     with c2:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.markdown('<h3>Granulometria</h3><p>(Estudo de Bolhas)</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card"><h3>Granulometria</h3><p>Medição do tamanho e distribuição das bolhas para avaliar a homogeneidade da amostra.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
     with c3:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.markdown('<h3>Estabilidade</h3><p>(Estabilidade Dinâmica)</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card"><h3>Estabilidade</h3><p>Avaliação da resistência estrutural da espuma sob variações de pressão e tempo.</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="ed"): ir_para_cadastro("Estabilidade Dinâmica")
 
-with st.sidebar:
-    st.header("Vídeo de Apoio")
-    st.video("https://youtu.be/hY5K55Ha2pg")
-    st.write("Assista ao tutorial antes de iniciar a análise.")
+    # Sidebar apenas na tela de seleção
+    with st.sidebar:
+        st.header("Vídeo de Apoio")
+        st.video("https://youtu.be/hY5K55Ha2pg")
+        st.write("Assista ao tutorial antes de iniciar a análise.")
 
-
-# --- TELA 2: CADASTRO DE TESTE (MODULARIZADA) ---
+# --- TELA 2: CADASTRO DE TESTE ---
 elif st.session_state.pagina == 'cadastro':
-    
-    # Renderizar o cabeçalho branco também na tela de cadastro para consistência
     try:
         logo_base64 = get_image_as_base64("logo-msb.png") 
-        header_html = f'''
-        <div id="header-container">
-            <img src="{logo_base64}" alt="MSB Logo">
-            <div>
-                <h1>Analisador B-Foam</h1>
-                <p>Medical System do Brasil - Plataforma de Análise</p>
-            </div>
-        </div>
-        '''
-        st.markdown(header_html, unsafe_allow_html=True)
+        st.markdown(f'''<div id="header-container"><img src="{logo_base64}" alt="MSB Logo">
+                      <div><h1>Analisador B-Foam</h1><p>Medical System do Brasil - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
     except: pass
-    st.markdown("---")
     
+    st.markdown("---")
     st.subheader(f"Ficha de Cadastro: {st.session_state.tipo_selecionado}")
     
-    # Botão para voltar com estilo
     if st.button("⬅️ Voltar ao Menu Principal"):
         st.session_state.pagina = 'selecao'
         st.rerun()
     
     tab1, tab2 = st.tabs(["➕ Cadastrar Novo Teste", "🔍 Buscar Histórico"])
-    
     with tab1:
-        # Espaço reservado para as funções de análise específicas
         st.write("Aguardando upload da imagem para análise...")
