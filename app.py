@@ -9,9 +9,9 @@ col1, col2 = st.columns([1, 3])
 with col1:
     try:
         # Busca o nome correto que você mencionou:
-        st.image("novo-msb.png", use_column_width=True) 
+        st.image("logo-msb.png", use_column_width=True) 
     except:
-        st.error("Logo 'novo-msb.png' não encontrada.")
+        st.error("Logo 'logo-msb.png' não encontrada.")
 with col2:
     st.title("Analisador B-Foam")
     st.caption("Medical System do Brasil - Plataforma de Análise")
