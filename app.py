@@ -129,7 +129,7 @@ if st.session_state.pagina == 'selecao':
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
    # URL formatada para exportação direta do Google Drive (o mesmo ID que você me deu)
-    link_video_granulometria = "https://drive.google.com/uc?export=view&id=13aP2W2rSOOqiqhY2HrlEcUQrhLNE6FKU"
+    link_video_granulometria = "https://drive.google.com/file/d/13aP2W2rSOOqiqhY2HrlEcUQrhLNE6FKU/view?usp=sharing"
 
     with c2:
         # Início do Card Customizado com a borda azul
