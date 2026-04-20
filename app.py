@@ -22,7 +22,14 @@ st.markdown("""
     #header-container h1 { margin: 0; font-size: 2.2em; font-weight: bold; }
     #header-container p { margin: 0; font-size: 1.1em; opacity: 0.8; }
 
-    .titulo-amarelo { color: #FFD700; font-size: 1.8em; font-weight: bold; margin-bottom: 20px; }
+    .titulo-amarelo { 
+        color: #FFD700; 
+        font-size: 2.5em;      /* Aumentei para 2.5em (pode ajustar para mais ou menos) */
+        font-weight: bold; 
+        text-align: center;    /* Centraliza o texto */
+        margin-top: 20px;      /* Espaço superior */
+        margin-bottom: 20px;   /* Espaço inferior para separar dos cards */
+    }
 
     .card { 
         background-color: #1E3A5F; padding: 20px; border-radius: 15px; 
@@ -50,7 +57,7 @@ if st.session_state.pagina == 'selecao':
     try:
         logo_base64 = get_image_as_base64("logo-msb.png") 
         st.markdown(f'''<div id="header-container"><img src="{logo_base64}" alt="MSB Logo">
-                      <div><h1>Analisador B-Foam</h1><p>Medical System do Brasil - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
+                      <div><h1>B-Foam</h1><p>Engenharia - MSB - Plataforma de Análise</p></div></div>''', unsafe_allow_html=True)
     except: st.error("Logotipo não encontrado.")
 
     st.markdown('<p class="titulo-amarelo">Selecione o tipo de análise desejada:</p>', unsafe_allow_html=True)
@@ -71,9 +78,9 @@ if st.session_state.pagina == 'selecao':
 
     # Sidebar apenas na tela de seleção
     with st.sidebar:
-        st.header("Vídeo de Apoio")
+        st.header("Vídeos de Apoio")
         st.video("https://youtu.be/hY5K55Ha2pg")
-        st.write("Assista ao tutorial antes de iniciar a análise.")
+        st.write("Assista ao teste de medição do tamanho de bolhas.")
 
 # --- TELA 2: CADASTRO DE TESTE ---
 elif st.session_state.pagina == 'cadastro':
