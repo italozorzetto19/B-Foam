@@ -113,40 +113,35 @@ if st.session_state.pagina == 'selecao':
 
     st.subheader("Selecione o tipo de análise desejada:")
     
-    # Colunas para os cards
+   # Colunas para os cards
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        # Card de Meia-Vida com imagem
+        # Card de Meia-Vida
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        # Placeholder da imagem (depois você troca pelo arquivo real)
         try:
-            # Use temporariamente a própria logo como placeholder, como sugerido
             st.image("logo-msb.png", use_column_width=True) 
         except: pass
         st.markdown('<p>Análise de Meia-Vida</p></div>', unsafe_allow_html=True)
-        
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
-   # URL formatada para exportação direta do Google Drive (o mesmo ID que você me deu)
-    link_video_granulometria = "https://drive.google.com/file/d/13aP2W2rSOOqiqhY2HrlEcUQrhLNE6FKU/view?usp=sharing"
-
-   with c2:
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    
-    # Agora o player do YouTube funcionará perfeitamente sem bloqueios
-    st.video("https://youtu.be/hY5K55Ha2pg")
-    
-    st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
+    with c2:
+        # Card de Granulometria (Alinhado corretamente)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        
+        # Player do YouTube
+        st.video("https://youtu.be/hY5K55Ha2pg")
+        
+        st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
     with c3:
-        # Card de Estabilidade com imagem
+        # Card de Estabilidade
         st.markdown('<div class="card">', unsafe_allow_html=True)
         try:
-            st.image("logo-msb.png", use_column_width=True) # Placeholder
+            st.image("logo-msb.png", use_column_width=True) 
         except: pass
         st.markdown('<p>Análise de Estabilidade</p></div>', unsafe_allow_html=True)
         
