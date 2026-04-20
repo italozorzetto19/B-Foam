@@ -128,14 +128,25 @@ if st.session_state.pagina == 'selecao':
         
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
+   # URL formatada para exportação direta do Google Drive (o mesmo ID que você me deu)
+    link_video_granulometria = "https://drive.google.com/uc?export=view&id=13aP2W2rSOOqiqhY2HrlEcUQrhLNE6FKU"
+
     with c2:
-        # Card de Granulometria com imagem
+        # Início do Card Customizado com a borda azul
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        try:
-            st.image("logo-msb.png", use_column_width=True) # Placeholder
-        except: pass
-        st.markdown('<p>Análise de Granulometria</p></div>', unsafe_allow_html=True)
         
+        # 1. O VÍDEO NO TOPO (Substituindo o logo e o retângulo vazio)
+        # O Streamlit ajustará a altura automaticamente dentro do card
+        st.video(link_video_granulometria)
+        
+        # 2. O TÍTULO EM AZUL MAIS CLARO (Onde estava o texto antigo, agora embaixo)
+        # Usamos uma classe CSS para dar a cor azul claro
+        st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
+        
+        # Fechamento do Card
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # O botão de selecionar continua abaixo do card para não misturar as ações
         if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
     with c3:
