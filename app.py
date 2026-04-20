@@ -117,34 +117,18 @@ if st.session_state.pagina == 'selecao':
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        # Card de Meia-Vida
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        try:
-            st.image("logo-msb.png", use_column_width=True) 
-        except: pass
-        st.markdown('<p>Análise de Meia-Vida</p></div>', unsafe_allow_html=True)
+        st.markdown('<h3>Meia-Vida</h3><p>(Estudo de Decaimento)</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="mv"): ir_para_cadastro("Meia-Vida")
     
     with c2:
-        # Card de Granulometria (Alinhado corretamente)
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        
-        # Player do YouTube
-        st.video("https://youtu.be/hY5K55Ha2pg")
-        
-        st.markdown('<p class="titulo-teste-claro">Análise de Granulometria (Estudo de Bolhas)</p>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-        
+        st.markdown('<h3>Granulometria</h3><p>(Estudo de Bolhas)</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="gr"): ir_para_cadastro("Granulometria")
     
     with c3:
-        # Card de Estabilidade
         st.markdown('<div class="card">', unsafe_allow_html=True)
-        try:
-            st.image("logo-msb.png", use_column_width=True) 
-        except: pass
-        st.markdown('<p>Análise de Estabilidade</p></div>', unsafe_allow_html=True)
-        
+        st.markdown('<h3>Estabilidade</h3><p>(Estabilidade Dinâmica)</p></div>', unsafe_allow_html=True)
         if st.button("Selecionar", key="ed"): ir_para_cadastro("Estabilidade Dinâmica")
 
 # --- TELA 2: CADASTRO DE TESTE (MODULARIZADA) ---
